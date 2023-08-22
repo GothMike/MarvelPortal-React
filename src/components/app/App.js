@@ -1,24 +1,15 @@
 import AppHeader from "../appHeader/AppHeader";
-import RandomChar from "../randomChar/RandomChar";
-import CharList from "../charList/CharList";
-import CharInfo from "../charInfo/CharInfo";
-
-import decoration from '../../resources/img/vision.png';
+import MainPage from "../pages/MainPage";
 
 const App = () => {
-    return (
-        <div className="app">
-            <AppHeader/>
-            <main>
-                <RandomChar/>
-                <div className="char__content">
-                    <CharList/>
-                    <CharInfo/>
-                </div>
-                <img className="bg-decoration" src={decoration} alt="vision"/>
-            </main>
-        </div>
-    )
-}
+  return (
+    <div className="app">
+      <AppHeader />
+      <main>
+        <MainPage />
+      </main>
+    </div>
+  );
+};
 
 export default App;
