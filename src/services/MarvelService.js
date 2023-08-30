@@ -9,22 +9,28 @@ const useMarvelService = () => {
   const _baseOffsetComics = 1332;
 
   const getAllCharacters = async (offset = _baseOffsetCharacter) => {
-    const res = await request(`${_apiBase}characters?limit=9&offset=${offset}&${_apiKey}`);
+    const res = await request(
+      `${_apiBase}characters?limit=9&offset=${offset}&${_apiKey}`
+    );
     return res.data.results.map(_transformCharacter);
   };
 
   const getCharacter = async (id) => {
-    const res = await request(`${_apiBase}characters/${id}?${_apiKey}`);
+    const res = await request(
+      `${_apiBase}characters/${id}?${_apiKey}`
+    );
     return _transformCharacter(res.data.results[0]);
   };
 
   const getAllComics = async (offset = _baseOffsetComics) => {
-    const res = await request(`${_apiBase}comics?limit=8&offset=${offset}&${_apiKey}`);
+    const res = await request(
+      `${_apiBase}comics?limit=8&offset=${offset}&${_apiKey}`
+    );
     return res.data.results.map(_transformComics);
   };
 
-  const getComics = async (id) => {
-    const res = await request(`${_apiBase}characters/${id}?${_apiKey}`);
+  const getComic = async (id) => {
+    const res = await request(`${_apiBase}comics/${id}?${_apiKey}`);
     return _transformComics(res.data.results[0]);
   };
 
@@ -38,7 +44,9 @@ const useMarvelService = () => {
       thumbnail: char.thumbnail.path + `.${char.thumbnail.extension}`,
       homepage: char.urls[0].url,
       wiki: char.urls[1].url,
-      comics: char.comics.items ? char.comics.items.slice(0, 10) : null,
+      comics: char.comics.items
+        ? char.comics.items.slice(0, 10)
+        : null,
     };
   };
 
@@ -49,13 +57,25 @@ const useMarvelService = () => {
       description: comics.description
         ? comics.description
         : "There is no description for this comics",
-      thumbnail: comics.thumbnail.path + `.${comics.thumbnail.extension}`,
-      price: comics.prices[0].price ? `${comics.prices[0].price} $` : "Not Available",
+      thumbnail:
+        comics.thumbnail.path + `.${comics.thumbnail.extension}`,
+      price: comics.prices[0].price
+        ? `${comics.prices[0].price} $`
+        : "Not Available",
       pageCount: comics.pageCount,
+      language: comics.textObjects[0]?.language || "en-us",
     };
   };
 
-  return { loading, error, getAllCharacters, getAllComics, getComics, getCharacter, clearError };
+  return {
+    loading,
+    error,
+    getAllCharacters,
+    getAllComics,
+    getComic,
+    getCharacter,
+    clearError,
+  };
 };
 
 export default useMarvelService;

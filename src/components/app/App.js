@@ -9,6 +9,7 @@ import {
   MainPage,
   ComicsPage,
   SingleComicPage,
+  Page404,
 } from "../pages/index";
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
               path="/comics/:comicId"
               element={<SingleComicPage />}
             />
+            <Route path="*" element={<Page404 />}></Route>
           </Routes>
         </main>
       </div>
